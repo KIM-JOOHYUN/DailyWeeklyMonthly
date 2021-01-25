@@ -1,1 +1,1 @@
-# DailyWeeklyMonthly
+# Daily Weekly Monthly
