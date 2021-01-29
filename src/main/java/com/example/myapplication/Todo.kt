@@ -21,6 +21,15 @@ class Todo {
         this.p_name = p_name
         this.p_desc = p_desc
     }
+    constructor(year: Int, mon: Int, day: Int, p_name: String, p_desc: String){
+        this.year = year
+        this.mon = mon
+        this.day = day
+        this.hour = 0
+        this.min = 0
+        this.p_name = p_name
+        this.p_desc = p_desc
+    }
     fun getName():String{
         return p_name
     }
