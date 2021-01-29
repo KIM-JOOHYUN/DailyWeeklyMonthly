@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name = "AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name = "colorPrimary">@color/back</item>
+        <item name="colorPrimaryDark">@color/purple_200</item>
+        <item name="colorAccent">@color/purple_500</item>
+    </style>
+    <style name="IntroTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/mainpage</item>
+    </style>
+</resources>
