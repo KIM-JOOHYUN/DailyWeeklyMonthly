@@ -8,11 +8,15 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.myapplication.Daily
 import com.example.myapplication.R
+import com.example.myapplication.Todo
 
 class DashboardFragment : Fragment() {
 
   private lateinit var dashboardViewModel: DashboardViewModel
+  var todoList = arrayListOf<Todo>()
+  var dailyList = arrayListOf<Daily>()
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -22,10 +26,7 @@ class DashboardFragment : Fragment() {
     dashboardViewModel =
             ViewModelProvider(this).get(DashboardViewModel::class.java)
     val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
-    val textView: TextView = root.findViewById(R.id.text_dashboard)
-    dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
-      textView.text = it
-    })
+
     return root
   }
 }
