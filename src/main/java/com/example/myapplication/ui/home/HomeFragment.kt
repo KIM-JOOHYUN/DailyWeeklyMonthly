@@ -11,6 +11,10 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.R
+import com.example.myapplication.SaturdayDecorator
+import com.example.myapplication.TodayDecorator
+import com.example.myapplication.ui.com.example.myapplication.SundayDecorator
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 
 
 class HomeFragment : Fragment() {
@@ -47,6 +51,12 @@ class HomeFragment : Fragment() {
         // set this date in TextView for Display
         date_view?.setText(Date)
       })
+    val sundayDecorator = SundayDecorator()
+    val saturdayDecorator = SaturdayDecorator()
+    val todayDecorator = TodayDecorator(this)
+
+    var cal: MaterialCalendarView= root.findViewById(R.id.calendar)
+    cal.addDecorators(sundayDecorator, saturdayDecorator, todayDecorator)
 
     return root
   }
