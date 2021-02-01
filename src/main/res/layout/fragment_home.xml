@@ -7,24 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- Add TextView to display the date -->
-    <TextView
-        android:id="@+id/date_view"
-        android:layout_width="wrap_content"
+ 
+    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/calendar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="165dp"
-        android:layout_marginTop="15dp"
-        android:text="Set the Date"
-        android:textColor="@android:color/background_dark"
-        android:textStyle="bold" />
-
-    <!-- Add CalenderView to display the Calender -->
-    <CalendarView
-        android:id="@+id/calender"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="29dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </CalendarView>
+        app:mcv_showOtherDates="all"
+        app:mcv_selectionColor="#d2d2d2"
+        />
 
 </RelativeLayout>
