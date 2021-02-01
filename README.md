@@ -8,7 +8,7 @@ build.gradle(app)
 
 build.gradle(project)
 > repositories {
-        google()
-        jcenter()
-        maven { url "https://jitpack.io"}
-    }
+>        google()
+>        jcenter()
+>        maven { url "https://jitpack.io"}
+>    }
