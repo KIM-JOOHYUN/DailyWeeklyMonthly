@@ -2,11 +2,11 @@ package com.example.myapplication
 
 import java.util.*
 
-class Daily{
+class Todo{
     val calendar:Calendar = Calendar.getInstance()
     var year = calendar.get(Calendar.YEAR)
     var mon = calendar.get(Calendar.MONTH)
-    var day = calendar.get(Calendar.DAY_OF_MONTH)
+    var date = calendar.get(Calendar.DAY_OF_MONTH)
     var hour = calendar.get(Calendar.HOUR_OF_DAY)
     var min = calendar.get(Calendar.MINUTE)
     var p_name = ""
@@ -21,7 +21,7 @@ class Daily{
         val calendar:Calendar = Calendar.getInstance()
         var year = calendar.get(Calendar.YEAR)
         var mon = calendar.get(Calendar.MONTH)
-        var day = calendar.get(Calendar.DAY_OF_MONTH)
+        var date = calendar.get(Calendar.DAY_OF_MONTH)
         var hour = calendar.get(Calendar.HOUR_OF_DAY)
         var min = calendar.get(Calendar.MINUTE)
         var p_name = ""
@@ -33,11 +33,11 @@ class Daily{
         var end_hour = 0
         var end_min = 0
     }
-    constructor(year: Int, mon: Int, day: Int, hour: Int, min: Int, p_name: String, p_desc: String,
+    constructor(year: Int, mon: Int, date: Int, hour: Int, min: Int, p_name: String, p_desc: String,
                 end_year: Int, end_month: Int, end_date: Int, end_hour: Int, end_min: Int){
         this.year = year
         this.mon = mon
-        this.day = day
+        this.date = date
         this.hour = hour
         this.min = min
         this.p_name = p_name
@@ -48,10 +48,10 @@ class Daily{
         this.end_month = end_month
         this.end_year = end_year
     }
-    constructor(year: Int, mon: Int, day: Int, hour: Int, min: Int, p_name: String, p_desc: String){
+    constructor(year: Int, mon: Int, date: Int, hour: Int, min: Int, p_name: String, p_desc: String){
         this.year = year
         this.mon = mon
-        this.day = day
+        this.date = date
         this.hour = hour
         this.min = min
         this.p_name = p_name
@@ -66,10 +66,10 @@ class Daily{
         var end_hour = 0
         var end_min = 0
     }
-    constructor(year: Int, mon: Int, day: Int, p_name: String, p_desc: String){
+    constructor(year: Int, mon: Int, date: Int, p_name: String, p_desc: String){
         this.year = year
         this.mon = mon
-        this.day = day
+        this.date = date
         this.hour = 0
         this.min = 0
         this.p_name = p_name
@@ -91,16 +91,16 @@ class Daily{
     fun getDesc():String {
         return p_desc
     }
-    fun setDate(year: Int, mon: Int, day: Int, hour: Int, min: Int){
+    fun setDate(year: Int, mon: Int, date: Int, hour: Int, min: Int){
         this.year = year
         this.mon = mon
-        this.day = day
+        this.date = date
         this.hour = hour
         this.min = min
     }
-    fun setDate(year: Int, mon: Int, day: Int){
+    fun setDate(year: Int, mon: Int, date: Int){
         this.year = year
         this.mon = mon
-        this.day = day
+        this.date = date
     }
 }
