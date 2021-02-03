@@ -9,31 +9,37 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@drawable/background">
-        <ImageView
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/text_daily"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:src="@drawable/schedule"
-            android:id="@+id/schedule"
-            />
-
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:paddingLeft="20dp"
+            android:text="Schedule"
+            android:textSize="25dp"
+            android:textStyle="bold"/>
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="230dp"
+            android:layout_height="250dp"
             android:id="@+id/dailyList"
             />
-
-        <ImageView
-            android:id="@+id/todo"
+        <TextView
+            android:id="@+id/text_todo"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:src="@drawable/todo"
-            android:layout_marginTop="8dp"/>
-
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:paddingLeft="20dp"
+            android:textStyle="bold"
+            android:text="Todo"
+            android:textSize="25dp"/>
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="230dp"
+            android:layout_height="250dp"
             android:id="@+id/todoList"
             />
     </LinearLayout>

@@ -5,16 +5,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/home_fragment1"
     tools:context=".MainActivity">
 
- 
     <com.prolificinteractive.materialcalendarview.MaterialCalendarView
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_centerHorizontal="true"
         android:id="@+id/calendar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:mcv_showOtherDates="all"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        app:mcv_showOtherDates="defaults"
         app:mcv_selectionColor="#d2d2d2"
         />
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/fab_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="55dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginRight="11dp"
+        app:menu_colorNormal="@color/peach"
+        >
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/schedule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_schedule"
+            android:visibility="visible"
+            app:fabCustomSize="40dp"
+            app:fabSize="auto"
+            app:fab_colorNormal="@color/lightpeach"
+            />
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/todo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_todo"
+            app:fabCustomSize="40dp"
+            app:fabSize="auto"
+            app:fab_colorNormal="@color/lightpeach"
+            />
+
+    </com.github.clans.fab.FloatingActionMenu>
 
 </RelativeLayout>

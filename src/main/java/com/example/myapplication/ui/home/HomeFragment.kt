@@ -1,6 +1,7 @@
 package com.example.myapplication.ui.home
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,11 +10,16 @@ import android.widget.CalendarView
 import android.widget.CalendarView.OnDateChangeListener
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.*
+import android.support.v4.app.*
+import androidx.core.view.isVisible
+import androidx.fragment.app.replace
 import androidx.lifecycle.ViewModelProvider
-import com.example.myapplication.R
-import com.example.myapplication.SaturdayDecorator
-import com.example.myapplication.TodayDecorator
+import com.example.myapplication.*
 import com.example.myapplication.ui.com.example.myapplication.SundayDecorator
+import com.github.clans.fab.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 
 
@@ -32,6 +38,7 @@ class HomeFragment : Fragment() {
     homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
     val root = inflater.inflate(R.layout.fragment_home, container, false)
+
 
     var calender: CalendarView? = null
     var date_view: TextView? =null
@@ -58,6 +65,22 @@ class HomeFragment : Fragment() {
     var cal: MaterialCalendarView= root.findViewById(R.id.calendar)
     cal.addDecorators(sundayDecorator, saturdayDecorator, todayDecorator)
 
+    var sch: FloatingActionButton = root.findViewById(R.id.schedule)
+
+    sch.setOnClickListener{
+        //activity?.supportFragmentManager?.beginTransaction()?.disallowAddToBackStack()?.commit()
+        cal.visibility = View.GONE
+        activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.home_fragment1,Scheduler())?.commit()
+
+    }
+    var todo: FloatingActionButton = root.findViewById(R.id.todo)
+    todo.setOnClickListener{
+      cal.visibility = View.GONE
+      activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.home_fragment1,Scheduler())?.commit()
+
+    }
+
     return root
+
   }
 }
