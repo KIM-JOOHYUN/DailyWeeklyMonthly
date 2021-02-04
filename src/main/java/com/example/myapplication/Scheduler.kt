@@ -2,7 +2,6 @@ package com.example.myapplication
 
 import android.app.TimePickerDialog
 import android.app.TimePickerDialog.OnTimeSetListener
-import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -17,7 +16,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 import android.widget.ArrayAdapter
-import org.w3c.dom.Text
+import com.example.myapplication.ui.home.HomeFragment
 
 
 class Scheduler : Fragment() {
@@ -38,6 +37,9 @@ class Scheduler : Fragment() {
                               savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.scheduler, null)
+
+        val db = DataBaseHandler(view.context)
+
         var mBtn: Button =view.findViewById(R.id.date)
         var tBtn: Button=view.findViewById(R.id.time_info)
         date=view.findViewById(R.id.date_info)
@@ -138,35 +140,18 @@ class Scheduler : Fragment() {
             s_name = nameText.text.toString()
             s_desc = descText.text.toString()
             Log.d("test", "s_name: $s_name, s_desc : $s_desc")
-            var prefs: SharedPreferences ?= context?.getSharedPreferences(s_name, 0)
-            var m_prefs:SharedPreferences ?= context?. getSharedPreferences("main",0)
-            //schedule name set
+            var db = DataBaseHandler(view.context)
+            var sch:Schedule = Schedule(s_name,s_desc,startDate,endDate,s_time,iter)
+            db.insertData(sch)
 
-            schSet = m_prefs?.getStringSet("sch",schSet) as MutableSet<String>
-            schSet.add(s_name!!)
-            var arr = listOf(schSet?.toList())
-            for(i in arr)
-                Log.d("testString", i.toString())
 
-            m_prefs?.edit()?.putStringSet("sch",schSet)?.apply()
+            var a = db.readData()
+            for(i in a){
+                Log.d("test",i.s_name.toString())
+            }
 
-            prefs?.edit()?.putString("name",s_name)?.apply()
-            prefs?.edit()?.putString("desc",s_desc)?.apply()
-            prefs?.edit()?.putString("startDate",startDate)?.apply()
-            prefs?.edit()?.putString("endDate",endDate)?.apply()
-            prefs?.edit()?.putString("time",s_time)?.apply()
-            prefs?.edit()?.putString("repeat",iter)?.apply()
+            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.home_fragment1,HomeFragment())?.commit()
 
-            Log.d("test", "s_name: " + prefs?.getString("name",null).toString())
-            Log.d("test", "s_desc: " + prefs?.getString("desc",null).toString())
-            Log.d("test", "s_start: " + prefs?.getString("startDate",null).toString())
-            Log.d("test", "s_end: " + prefs?.getString("endDate",null).toString())
-            Log.d("test", "s_time: " + prefs?.getString("time",null).toString())
-            Log.d("test", "s_repeat: " + prefs?.getString("repeat",null).toString())
-
-            arr = listOf(m_prefs?.getStringSet("sch",null)?.toList()) as List<List<String>>
-            for(i in arr)
-                Log.d("testString",i.toString())
         })
 
         return view

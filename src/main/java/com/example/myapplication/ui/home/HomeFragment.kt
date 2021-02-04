@@ -1,6 +1,7 @@
 package com.example.myapplication.ui.home
 
 
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.*
 import android.support.v4.app.*
+import android.util.Log
 import androidx.core.view.isVisible
 import androidx.fragment.app.replace
 import androidx.lifecycle.ViewModelProvider
@@ -27,8 +29,9 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
-    var m_prefs:SharedPreferences ?= context?. getSharedPreferences("main",0)
-    var schSet : Set<String> ?= null
+    var m_prefs:SharedPreferences ?= context?. getSharedPreferences("main", Context.MODE_PRIVATE)
+    var schSet = mutableSetOf<String>()
+    var s_name: String ?= null
   // Define the variable of CalendarView type
   // and TextView type;
 
@@ -40,9 +43,6 @@ class HomeFragment : Fragment() {
     homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
     val root = inflater.inflate(R.layout.fragment_home, container, false)
-
-      //schedule name set
-      schSet = m_prefs?.getStringSet("sch",schSet)
 
     var calender: CalendarView? = null
     var date_view: TextView? =null
@@ -71,6 +71,20 @@ class HomeFragment : Fragment() {
 
     var sch: FloatingActionButton = root.findViewById(R.id.schedule)
 
+      //Get Schedule list
+      //schedule name set
+      var db = DataBaseHandler(root.context)
+      var a = db.readData()
+      for(i in a){
+          Log.d("testname",i.s_name.toString())
+          Log.d("testdesc",i.s_desc.toString())
+          Log.d("testst",i.s_start.toString())
+          Log.d("testend",i.s_end.toString())
+          Log.d("testtime",i.s_time.toString())
+          Log.d("testit",i.s_iter.toString())
+
+      }
+
     sch.setOnClickListener{
         //activity?.supportFragmentManager?.beginTransaction()?.disallowAddToBackStack()?.commit()
         cal.visibility = View.GONE
@@ -81,7 +95,6 @@ class HomeFragment : Fragment() {
     todo.setOnClickListener{
       cal.visibility = View.GONE
       activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.home_fragment1,Scheduler())?.commit()
-
     }
 
     return root
