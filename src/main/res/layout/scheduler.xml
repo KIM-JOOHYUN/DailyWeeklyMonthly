@@ -5,12 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.notifications.NotificationsFragment" >
+    tools:context=".ui.notifications.NotificationsFragment"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_margin="10dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -94,11 +96,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:textSize="20dp" />
+                android:textSize="20dp"/>
             <TextView
                 android:id="@+id/time_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 />
 
         </LinearLayout>
@@ -114,8 +117,20 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:textSize="20dp" />
-
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                />
         </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp"
+            android:id="@+id/saveBtn"/>
 
 
     </LinearLayout>
