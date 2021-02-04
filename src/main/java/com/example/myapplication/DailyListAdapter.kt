@@ -15,7 +15,7 @@ class DailyListAdapter(val context: Context, val dailyList:ArrayList<Daily>) : B
 
         val daily = dailyList[position]
         dailyName.text = daily.p_name
-        dailyTime.text = daily.p_time
+        //dailyTime.text = daily.p_time
         return view
     }
     override fun getItem(position:Int):Any{

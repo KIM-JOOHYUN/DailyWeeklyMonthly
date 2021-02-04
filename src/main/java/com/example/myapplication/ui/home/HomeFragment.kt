@@ -2,6 +2,7 @@ package com.example.myapplication.ui.home
 
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,8 +26,9 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 
 class HomeFragment : Fragment() {
 
-  private lateinit var homeViewModel: HomeViewModel
-
+    private lateinit var homeViewModel: HomeViewModel
+    var m_prefs:SharedPreferences ?= context?. getSharedPreferences("main",0)
+    var schSet : Set<String> ?= null
   // Define the variable of CalendarView type
   // and TextView type;
 
@@ -39,6 +41,8 @@ class HomeFragment : Fragment() {
             ViewModelProvider(this).get(HomeViewModel::class.java)
     val root = inflater.inflate(R.layout.fragment_home, container, false)
 
+      //schedule name set
+      schSet = m_prefs?.getStringSet("sch",schSet)
 
     var calender: CalendarView? = null
     var date_view: TextView? =null
