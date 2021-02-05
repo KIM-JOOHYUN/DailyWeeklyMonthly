@@ -50,5 +50,15 @@
             />
 
     </com.github.clans.fab.FloatingActionMenu>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="350dp"
+        android:layout_marginBottom="63dp"
+        android:layout_marginRight="80dp"
+        android:id="@+id/sch_list"
+        />
+
+
 
 </RelativeLayout>

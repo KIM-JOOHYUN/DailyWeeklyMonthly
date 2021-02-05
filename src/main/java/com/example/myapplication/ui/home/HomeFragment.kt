@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.*
 import android.support.v4.app.*
 import android.util.Log
+import android.widget.ListView
 import androidx.core.view.isVisible
 import androidx.fragment.app.replace
 import androidx.lifecycle.ViewModelProvider
@@ -32,6 +33,7 @@ class HomeFragment : Fragment() {
     var m_prefs:SharedPreferences ?= context?. getSharedPreferences("main", Context.MODE_PRIVATE)
     var schSet = mutableSetOf<String>()
     var s_name: String ?= null
+    var sch_list = arrayListOf<Schedule>()
   // Define the variable of CalendarView type
   // and TextView type;
 
@@ -75,25 +77,33 @@ class HomeFragment : Fragment() {
       //schedule name set
       var db = DataBaseHandler(root.context)
       var a = db.readData()
-      for(i in a){
-          Log.d("testname",i.s_name.toString())
-          Log.d("testdesc",i.s_desc.toString())
-          Log.d("testst",i.s_start.toString())
-          Log.d("testend",i.s_end.toString())
-          Log.d("testtime",i.s_time.toString())
-          Log.d("testit",i.s_iter.toString())
 
-      }
+      sch_list = a as ArrayList<Schedule>
+//      for(i in a){
+//          sch_list.add(i)
+//          Log.d("testname",i.s_name.toString())
+//          Log.d("testdesc",i.s_desc.toString())
+//          Log.d("testst",i.s_start.toString())
+//          Log.d("testend",i.s_end.toString())
+//          Log.d("testtime",i.s_time.toString())
+//          Log.d("testit",i.s_iter.toString())
+//      }
+      val schAdapter = ScheduleAdapter(root.context, sch_list)
+      val schListView = root.findViewById<ListView>(R.id.sch_list)
+
+      schListView.adapter = schAdapter
 
     sch.setOnClickListener{
         //activity?.supportFragmentManager?.beginTransaction()?.disallowAddToBackStack()?.commit()
         cal.visibility = View.GONE
+        schListView.visibility = View.GONE
         activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.home_fragment1,Scheduler())?.commit()
 
     }
     var todo: FloatingActionButton = root.findViewById(R.id.todo)
     todo.setOnClickListener{
       cal.visibility = View.GONE
+        schListView.visibility = View.GONE
       activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.home_fragment1,Scheduler())?.commit()
     }
 

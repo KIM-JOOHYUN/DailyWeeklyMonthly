@@ -20,7 +20,7 @@ class DataBaseHandler(var context: Context) :SQLiteOpenHelper(context, DATABASE_
 
     override fun onCreate(db: SQLiteDatabase?) {
 
-        val createTable = "CREATE TABLE if not exists $TABLE_NAME ($COL_NAME VARCHAR(50) PRIMARY KEY,$COL_DESC VARCHAR(100),$COL_START VARCHAR(20),$COL_END VARCHAR(20),$COL_TIME VARCHAR(20),$COL_ITER VARCHAR(10))"
+        val createTable = "CREATE TABLE if not exists $TABLE_NAME ($COL_NAME VARCHAR(50) , $COL_DESC VARCHAR(100),$COL_START VARCHAR(20),$COL_END VARCHAR(20),$COL_TIME VARCHAR(20),$COL_ITER VARCHAR(10))"
         db?.execSQL(createTable)
     }
 
