@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/dashh"
     tools:context=".ui.dashboard.DashboardFragment" >
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,29 +19,33 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:paddingLeft="20dp"
-            android:text="Schedule"
+            android:text="TodayTodo"
             android:textSize="25dp"
             android:textStyle="bold"/>
+
         <ListView
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:id="@+id/dailyList"
+            android:id="@+id/TodayList"
             />
+
         <TextView
             android:id="@+id/text_todo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:paddingLeft="20dp"
             android:textStyle="bold"
-            android:text="Todo"
+            android:text="Future Todo"
             android:textSize="25dp"/>
+
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="wrap_content"
             android:id="@+id/todoList"
+            android:layout_marginBottom="63dp"
+
             />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

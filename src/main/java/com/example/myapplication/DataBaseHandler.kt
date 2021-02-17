@@ -72,10 +72,10 @@ class DataBaseHandler(var context: Context) :SQLiteOpenHelper(context, DATABASE_
         return list
     }
 
-    fun deleteData(){
+    fun deleteData(name:String, desc:String){
         val db = this.writableDatabase
         //db.delete(TABLE_NAME, "$COL_ID=?", arrayOf("1"))
-        db.delete(TABLE_NAME, null,null)
+        db.execSQL("DELETE FROM $TABLE_NAME WHERE schedule_name = '$name' AND description = '$desc'")
         db.close()
     }
 }

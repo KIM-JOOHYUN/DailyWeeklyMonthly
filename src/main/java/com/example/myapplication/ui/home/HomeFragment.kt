@@ -8,15 +8,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CalendarView
 import android.widget.CalendarView.OnDateChangeListener
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.*
 import android.support.v4.app.*
 import android.util.Log
-import android.widget.ListView
+import android.widget.*
+import androidx.annotation.NonNull
 import androidx.core.view.isVisible
 import androidx.fragment.app.replace
 import androidx.lifecycle.ViewModelProvider
@@ -24,7 +23,11 @@ import com.example.myapplication.*
 import com.example.myapplication.ui.com.example.myapplication.SundayDecorator
 import com.github.clans.fab.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
+import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener
+import java.time.Month
+import java.time.Year
 
 
 class HomeFragment : Fragment() {
@@ -45,7 +48,6 @@ class HomeFragment : Fragment() {
     homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
     val root = inflater.inflate(R.layout.fragment_home, container, false)
-
     var calender: CalendarView? = null
     var date_view: TextView? =null
     // Add Listener in calendar
@@ -69,16 +71,14 @@ class HomeFragment : Fragment() {
     val todayDecorator = TodayDecorator(this)
 
     var cal: MaterialCalendarView= root.findViewById(R.id.calendar)
-    cal.addDecorators(sundayDecorator, saturdayDecorator, todayDecorator)
-
-    var sch: FloatingActionButton = root.findViewById(R.id.schedule)
+      cal.addDecorators(sundayDecorator, saturdayDecorator, todayDecorator)
+      var sch: FloatingActionButton = root.findViewById(R.id.schedule)
 
       //Get Schedule list
       //schedule name set
       var db = DataBaseHandler(root.context)
       var a = db.readData()
-
-      sch_list = a as ArrayList<Schedule>
+      val today = CalendarDay.today()
 //      for(i in a){
 //          sch_list.add(i)
 //          Log.d("testname",i.s_name.toString())
@@ -88,26 +88,84 @@ class HomeFragment : Fragment() {
 //          Log.d("testtime",i.s_time.toString())
 //          Log.d("testit",i.s_iter.toString())
 //      }
-      val schAdapter = ScheduleAdapter(root.context, sch_list)
-      val schListView = root.findViewById<ListView>(R.id.sch_list)
+
+      for(i in a){
+          var s_st = i.s_start?.split(".")
+          var s_ed = i.s_end?.split(".")
+          if (s_st != null) {
+              if(s_ed != null){
+                  if(today.year.toInt() >= s_st[0].toInt() && today.year.toInt() <= s_ed[0].toInt() && today.month.toInt() >= s_st[1].toInt() && today.month.toInt() <= s_ed[1].toInt() && today.day.toInt() >= s_st[2].toInt() && today.day.toInt() <= s_ed[2].toInt()){
+                      sch_list.add(i)
+                  }
+                  else if(today.year.toInt() == s_st[0].toInt() && today.month.toInt() == s_st[1].toInt() && today.day.toInt() == s_st[2].toInt()){
+                      sch_list.add(i)
+                  }
+              }
+          }
+      }
+
+      var schAdapter = ScheduleAdapter(root.context, sch_list)
+      var schListView = root.findViewById<ListView>(R.id.sch_list)
 
       schListView.adapter = schAdapter
+
+      cal.setOnDateChangedListener(OnDateSelectedListener{ widget, date, selected ->
+          val Year = date.year.toInt()
+          val Month = date.month.toInt()
+          val Day = date.day.toInt()
+          var select_list = arrayListOf<Schedule>()
+          for(i in a){
+              var s_st = i.s_start?.split(".")
+              var s_ed = i.s_end?.split(".")
+              if (s_st != null) {
+                  if(s_ed != null){
+                      if(Year >= s_st[0].toInt() && Year <= s_ed[0].toInt() && Month >= s_st[1].toInt() && Month <= s_ed[1].toInt() && Day >= s_st[2].toInt() && Day <= s_ed[2].toInt()){
+                          select_list.add(i)
+                      }
+                      else if(Year == s_st[0].toInt() && Month == s_st[1].toInt() && Day == s_st[2].toInt()){
+                          select_list.add(i)
+                      }
+                  }
+              }
+          }
+          schAdapter = ScheduleAdapter(root.context, select_list)
+          schListView.adapter = schAdapter
+      })
 
     sch.setOnClickListener{
         //activity?.supportFragmentManager?.beginTransaction()?.disallowAddToBackStack()?.commit()
         cal.visibility = View.GONE
         schListView.visibility = View.GONE
         activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.home_fragment1,Scheduler())?.commit()
-
     }
     var todo: FloatingActionButton = root.findViewById(R.id.todo)
     todo.setOnClickListener{
       cal.visibility = View.GONE
-        schListView.visibility = View.GONE
-      activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.home_fragment1,Scheduler())?.commit()
+      schListView.visibility = View.GONE
+      activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.home_fragment1,todoList())?.commit()
     }
 
+
+    schListView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
+        val selectItem = parent.getItemAtPosition(position) as Schedule
+        Log.d("testit",selectItem.toString())
+        cal.visibility = View.GONE
+        schListView.visibility = View.GONE
+
+        var bundle : Bundle = Bundle()
+        bundle.putString("name",selectItem.s_name)
+        bundle.putString("desc",selectItem.s_desc)
+        bundle.putString("start",selectItem.s_start)
+        bundle.putString("end",selectItem.s_end)
+        bundle.putString("time",selectItem.s_time)
+        bundle.putString("iter",selectItem.s_iter)
+
+        var fragment1 : UpdateSchedule = UpdateSchedule()
+        fragment1.arguments = bundle
+        activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.home_fragment1,fragment1)?.commit()
+    }
     return root
 
   }
 }
+

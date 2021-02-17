@@ -18,7 +18,6 @@ import java.util.*
 import android.widget.ArrayAdapter
 import com.example.myapplication.ui.home.HomeFragment
 
-
 class Scheduler : Fragment() {
     var date: TextView?=null
     var startDate: String ?=null
