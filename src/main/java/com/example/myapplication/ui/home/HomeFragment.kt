@@ -37,31 +37,31 @@ class HomeFragment : Fragment() {
     // and TextView type;
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+                ViewModelProvider(this).get(HomeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_home, container, false)
         var calender: CalendarView? = null
         var date_view: TextView? =null
         // Add Listener in calendar
         calender?.setOnDateChangeListener(
-            OnDateChangeListener { view, year, month, dayOfMonth ->
-                // In this Listener have one method
-                // and in this method we will
-                // get the value of DAYS, MONTH, YEARS
-                // Store the value of date with
-                // format in String type Variable
-                // Add 1 in month because month
-                // index is start with 0
-                val Date = (dayOfMonth.toString() + "-"
-                        + (month + 1) + "-" + year)
+                OnDateChangeListener { view, year, month, dayOfMonth ->
+                    // In this Listener have one method
+                    // and in this method we will
+                    // get the value of DAYS, MONTH, YEARS
+                    // Store the value of date with
+                    // format in String type Variable
+                    // Add 1 in month because month
+                    // index is start with 0
+                    val Date = (dayOfMonth.toString() + "-"
+                            + (month + 1) + "-" + year)
 
-                // set this date in TextView for Display
-                date_view?.setText(Date)
-            })
+                    // set this date in TextView for Display
+                    date_view?.setText(Date)
+                })
         val sundayDecorator = SundayDecorator()
         val saturdayDecorator = SaturdayDecorator()
         val todayDecorator = TodayDecorator(this)
@@ -212,4 +212,3 @@ object Main {
         }
     }
 }
-

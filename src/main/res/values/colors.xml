@@ -3,8 +3,8 @@
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#6C4F95</color>
     <color name="purple_700">#6D5D91</color>
-    <color name="teal_200">#EBBDFF</color>
-    <color name="teal_700">#FF018786</color>
+    <color name="teal_200">#939597</color>
+    <color name="teal_700">#939597</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="back">#D7D5ED</color>
@@ -14,18 +14,22 @@
     <color name="darkpurple">#8A86AB</color>
     <color name="lightpurple">#E9D5FB</color>
     <color name="lightyellow">#FFECDD</color>
-    <color name="yellow">#FFF7C9</color>
+
     <color name="green">#D4E6BE</color>
     <color name="grey">#F0E8E6</color>
     <color name="darkgrey">#ACA9A2</color>
     <color name="darkgreen">#677B70</color>
     <color name="deeppurple">#4D2D45</color>
     <color name="yellow2">#F7DFB2</color>
-    <color name="peach">#F5B39D</color>
-    <color name="lightpeach">#F9DACF</color>
+
     <color name="colorPrimary">#4CAF50</color>
     <color name="colorPrimaryDark">#388E3C</color>
     <color name="colorAccent">#FFFFFF</color>
     <color name="colorFAB1">#2196F3</color>
     <color name="colorFAB2">#E040FB</color>
+
+    <color name="yellow">#F5dF4D</color>
+
+    <color name="peach">#F5dF4D</color>
+    <color name="lightpeach">#F4EAA9</color>
 </resources>
