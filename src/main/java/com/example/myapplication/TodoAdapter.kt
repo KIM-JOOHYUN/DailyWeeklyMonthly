@@ -32,6 +32,7 @@ class TodoAdapter(val context: Context, val TodoList: ArrayList<Todo>) : BaseAda
             s_Time.text = todo.s_start
         }
 
+
         var del: ImageButton=view.findViewById(R.id.img_button)
         val db = DataBaseHandler1(view.context)
         del.setOnClickListener() {
@@ -43,9 +44,30 @@ class TodoAdapter(val context: Context, val TodoList: ArrayList<Todo>) : BaseAda
         }
 
         var check_b: CheckBox=view.findViewById(R.id.check)
+        if(TodoList[position].checked == "yes"){
+            check_b.setChecked(true)
+            Log.d("test_check","${TodoList[position].checked}")
+        }else if(TodoList[position].checked == "no"){
+            check_b.setChecked(false)
+            Log.d("test_check", "${TodoList[position].checked}")
+        }
         check_b.setOnClickListener(){
-            var newState: Boolean? =TodoList[position].checked
-            TodoList[position].checked =newState
+            var helper = db.writableDatabase
+//            var sql = "update $TABLE_NAME1 set checked='yes' where schedule_name1 ='${TodoList[position].s_name}' and date1 ='${TodoList[position].s_start}'"
+//            helper.execSQL(sql)
+            var sql = ""
+            if(TodoList[position].checked == "yes"){
+//                var helper = db.writableDatabase
+                sql = "update $TABLE_NAME1 set checked='no' where schedule_name1 ='${TodoList[position].s_name}' and date1 ='${TodoList[position].s_start}'"
+//                helper.close()
+            }else{
+//                var helper = db.writableDatabase
+                sql = "update $TABLE_NAME1 set checked='yes' where schedule_name1 ='${TodoList[position].s_name}' and date1 ='${TodoList[position].s_start}'"
+//                helper.execSQL(sql)
+//                helper.close()
+            }
+            helper.execSQL(sql)
+            helper.close()
         }
 
 
@@ -60,7 +82,7 @@ class TodoAdapter(val context: Context, val TodoList: ArrayList<Todo>) : BaseAda
     override fun getCount(): Int {
         return TodoList.size
     }
-    fun isChecked(position: Int): Boolean? {
+    fun isChecked(position: Int): String? {
         return TodoList[position].checked
     }
 
