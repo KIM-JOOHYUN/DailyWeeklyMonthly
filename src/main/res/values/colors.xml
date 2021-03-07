@@ -18,6 +18,7 @@
     <color name="green">#D4E6BE</color>
     <color name="grey">#F0E8E6</color>
     <color name="darkgrey">#ACA9A2</color>
+    <color name="deepgrey">#4A4A4A</color>
     <color name="darkgreen">#677B70</color>
     <color name="deeppurple">#4D2D45</color>
     <color name="yellow2">#F7DFB2</color>
@@ -32,4 +33,5 @@
 
     <color name="peach">#F5dF4D</color>
     <color name="lightpeach">#F4EAA9</color>
+
 </resources>
